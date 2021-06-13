@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class='row'>
+      <div class="jumbotron text-center">
+        <h1>Mission To Mars</h1>
+        <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+      </div>
+    </div>
+
+    <!-- Mars News -->
+    <div class="row" id="mars-data">
+      <div class="col-lg-12">
+        <h1 class="heading font-weight-bold">Latest Mars News</h1>
+        <h3 class="heading font-weight-bold">{{mars_results.news_title}}</h2>
+          <p class="font-weight-normal">{{mars_results.news_paragraph}}</p>
+      </div>
+    </div>
+
+    <!-- Mars Featured Image and Facts Table -->
+    <div class='row' id='featured-image'>
+      <div class='col-lg-8'>
+        <h1 class='heading font-weight-bold'>Featured Mars Image</h1>
+        <img class="img-fluid" src="{{ mars_results.featured_image }}" alt="Featured Image"></img>
+      </div>
+      <div class='col-lg-4'>
+        <h1>Mars Facts</h1>
+        <table class='table'>{{mars_results.facts_table|safe}}</table>
+      </div>
+    </div>
+
+    <!--Mars Hemispheres Jinja Loop-->
+    <div class='row' id='hemispheres'>
+      <h1>Mars Hemispheres</h1>
+      {% for url in mars_results.hemi_image_urls %}
+      <div class='col-lg-3'>
+        <div class='card-mb-3'>
+          <img class='card-img-top' src='{{url.img_url}}' alt="{{url.title}}" height='250px'>
+          <h5 class='card-title'> {{url.title}} </h5>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+
+</html>
